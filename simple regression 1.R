@@ -1,0 +1,15 @@
+library(ISLR)
+A=data.frame(Auto)
+A1=na.omit(A)
+sf=sample(2,nrow(A1),replace= TRUE,prob=c(0.7,0.3))
+trd=A1[sf==1,]
+tsd=A1[sf==2,]
+library(psych)
+pairs.panels(A1)
+cor(A1[,1:8])
+model2=lm(weight~displacement,data=trd)
+summary(model2)
+pred=predict(model2,tsd)
+CMP=cbind(tsd$weight,pred)
+plot(trd$displacement,trd$weight)
+abline()
